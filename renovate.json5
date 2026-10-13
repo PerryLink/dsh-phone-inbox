@@ -1,0 +1,9 @@
+{
+  // Version-lock template for new @perrylink dsh plugin repos. In-range
+  // dependency updates flow through the shared preset hosted in
+  // dsh-plugin-kit; breaking `@deepseek-ai/dsh-*` range re-pins are done with
+  // `node scripts/sync-peer-range.mjs --dir <reposDir> --write` from
+  // dsh-plugin-kit so every repo moves together.
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: ["github>PerryLink/dsh-plugin-kit//renovate/default.json5"],
+}

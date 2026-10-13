@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Phone inbox",
+    "description": "The session's inbound phone (WeChat bridge) attachment inbox: list what this conversation received and adopt one into the workspace"
+  }
+}

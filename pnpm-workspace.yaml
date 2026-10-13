@@ -1,0 +1,7 @@
+# pnpm 11 refuses to run dependency build scripts unless they are allowed.
+# esbuild is pulled in by vitest; the toolchain otherwise stays script-free.
+onlyBuiltDependencies:
+  - esbuild
+
+allowBuilds:
+  esbuild: true

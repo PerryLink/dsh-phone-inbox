@@ -1,0 +1,103 @@
+name: publish
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write # GitHub Release
+  id-token: write # npm provenance
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11.7.0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+          registry-url: 'https://registry.npmjs.org'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run typecheck
+      - run: pnpm test
+      - run: pnpm run build
+      - run: pnpm run verify:self-contained
+      - run: pnpm run verify:artifacts
+      - run: pnpm run check:readmes
+      - run: pnpm run acceptance
+      - name: Verify the tag matches the package version
+        shell: bash
+        run: |
+          tag="v$(node -p "require('./package.json').version")"
+          if [ "${GITHUB_REF_NAME}" != "${tag}" ]; then
+            echo "tag ${GITHUB_REF_NAME} does not match package version ${tag}"
+            exit 1
+          fi
+      # This account's npm granular access tokens are stage-only. A direct
+      # publish is tried first: a "Read and write" token publishes straight to
+      # the registry and the version becomes installable immediately. A
+      # "Read and write (stage only)" token is refused with E_STAGE_REQUIRED; for
+      # that one the version is staged instead, which leaves it uninstallable
+      # until a maintainer approves it with 2FA (npm web UI, or
+      # "npm stage approve <stage-id>"). "npm stage" only exists from npm
+      # 11.15.0, hence the upgrade step.
+      - name: Upgrade npm so the stage command exists
+        shell: bash
+        run: |
+          npm install -g npm@^11.15.0
+          echo "npm: $(npm --version)"
+      - name: Publish to npm
+        shell: bash
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          if npm view "dsh-phone-inbox@${version}" version >/dev/null 2>&1; then
+            echo "dsh-phone-inbox@${version} is already live on the registry; nothing to do"
+            exit 0
+          fi
+          set +e
+          out="$(npm publish --provenance --access public 2>&1)"
+          status=$?
+          set -e
+          printf '%s\n' "$out"
+          if [ "$status" -eq 0 ]; then
+            echo "published dsh-phone-inbox@${version} directly"
+            exit 0
+          fi
+          if printf '%s' "$out" | grep -qE 'E_STAGE_REQUIRED|staging area'; then
+            echo "this token is stage-only; staging dsh-phone-inbox@${version} instead"
+            npm stage publish --provenance --access public
+            exit $?
+          fi
+          if printf '%s' "$out" | grep -qE 'E409|EPUBLISHCONFLICT|previously published'; then
+            echo "dsh-phone-inbox@${version} already exists; treating this as done"
+            exit 0
+          fi
+          exit "$status"
+      # Advisory: say which of the two resting states the version is in, so the
+      # run summary does not read as "published" when it is only queued.
+      - name: Report the staged state (advisory)
+        shell: bash
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          if npm view "dsh-phone-inbox@${version}" version >/dev/null 2>&1; then
+            echo "dsh-phone-inbox@${version} is live on the registry"
+            exit 0
+          fi
+          echo "::notice::dsh-phone-inbox@${version} is staged and awaits maintainer approval with 2FA"
+          npm stage list "dsh-phone-inbox" || true
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v3
+        with:
+          generate_release_notes: true

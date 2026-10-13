@@ -1,0 +1,58 @@
+# dsh-phone-inbox bundle layer: register this plugin as a bundle row.
+#
+# This file is the `dsh.bundle.patch` layer (see package.json#dsh.bundle.patch).
+# Layer semantics: a YAML array of row verbs; `insert` adds plugin rows to the
+# composed config. A row's `id` must be unique within the layer stack; `name`
+# resolves the plugin module through the installed package (package.json#main).
+- insert:
+    - id: dsh-phone-inbox
+      name: dsh-phone-inbox
+      config:
+        # Master switch. `false` mounts nothing (no service, no tools).
+        enabled: true
+        # Directory the WeChat bridge drops inbound media into. The bridge's own
+        # default is `~/.dsh-wechat/tempfile` (or `$storageDir/tempfile` when the
+        # bridge's storageDir is configured); leave this empty to derive it, or
+        # set it to the real location when the bridge was moved.
+        inboxDir: ""
+        # How many attachments inbox_list returns. The MVP contract is "the
+        # session's most recent few", so this default is deliberately small.
+        maxItems: 5
+        # Which registered provider answers: `session` (the calling session's own
+        # messages — attribution proven) or `tempdir` (`session` plus a scan of
+        # inboxDir for files no message claimed).
+        provider: session
+        # Enables the tempdir scan at all. Kept off by default: inboxDir is one
+        # global directory shared by every WeChat sender and every session, so a
+        # scan can show one user another user's attachments.
+        allowTempdirScan: false
+        # How many entries a scan may contribute, and the age ceiling (ms) for a
+        # scanned file. 0 disables the age filter.
+        tempdirScanMaxItems: 5
+        tempdirScanMaxAgeMs: 3600000
+        # Marker wording per media kind, as RegExp sources whose first capture
+        # group is the absolute path the bridge saved (and, for `file`, the
+        # original name). These are the wordings observed in dsh-wechat's inbound
+        # adapter; a bridge wording change is a config edit, not a plugin release.
+        markers:
+          image:
+            path: "文件已保存到:\\s*(.+)"
+          file:
+            path: "(?:文件已保存到|文件路径):\\s*(.+)"
+            name: "\\[收到文件:\\s*([^\\]]+)\\]"
+          video:
+            path: "文件已保存到:\\s*(.+)"
+        # Workspace subdirectory inbox_adopt writes into.
+        defaultSubdir: phone-inbox
+        # Restore the sender's original file name (recovered from the marker
+        # text) as the adopted file name. The bridge replaces every non-ASCII
+        # character in the on-disk name with `_`, so this is what keeps a Chinese
+        # file name usable.
+        restoreOriginalName: true
+        # Preferred write channel: `auto` (fs service for text extensions, node
+        # otherwise), `fs` (host fs service only — text, honours the fs sandbox
+        # policy), or `node` (bytes directly).
+        writeChannel: auto
+        # Also register adopted bytes as a durable host attachment. Off by
+        # default: attachment objects are never garbage-collected.
+        registerAttachment: false

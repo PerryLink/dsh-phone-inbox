@@ -219,11 +219,19 @@ function collapsePath(value: string): string {
  * convention. `path.isAbsolute` is platform-specific, but the marker text is
  * not: a Windows host can read a message that carries a POSIX path, and a POSIX
  * host can read a Windows one, so the contract must accept both.
+ *
+ * ⚠️ The drive form must be recognized **without** `path.isAbsolute`. On POSIX
+ * that function returns `false` for `C:\Users\…`, so a Windows path captured on a
+ * Linux host was rejected here and every marker on that line was dropped — the
+ * exact failure CI reported (`expected [] to have a length of 1`). A Windows path
+ * in a message is a Windows path regardless of which OS is reading it.
  * @param value - the normalized candidate.
  * @returns `true` for a separator-led or drive-led path.
  */
 export function isAbsolutePath(value: string): boolean {
   if (value.startsWith('/') || value.startsWith('\\')) return true
+  // Drive form (`C:\…` or `C:/…`), valid on every host.
+  if (/^[A-Za-z]:[\\/]/u.test(value)) return true
   return path.isAbsolute(value)
 }
 

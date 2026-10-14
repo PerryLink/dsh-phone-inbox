@@ -50,9 +50,33 @@ describe('containedJoin', () => {
     expect(() => containedJoin(root, '../outside')).toThrow(/resolves outside the workspace root/u)
   })
 
-  it('refuses an absolute subdirectory outside the workspace', () => {
+  it('refuses a nested escape that resolves outside the workspace', () => {
+    // Reaches the containment branch (not the absolute-path branch below): a
+    // relative value that `..` walks out of the root.
     const root = path.resolve('C:/ws')
-    expect(() => containedJoin(root, 'C:/elsewhere')).toThrow(/resolves outside the workspace root/u)
+    expect(() => containedJoin(root, 'a/../../outside')).toThrow(/resolves outside the workspace root/u)
+  })
+
+  it('refuses a drive-absolute subdirectory on every platform, because the argument must be relative', () => {
+    // This used to be asserted through `path.resolve`, and acceptance itself was
+    // platform-dependent: on Windows `C:/elsewhere` is absolute and resolved
+    // outside the root (rejected); on POSIX the same string was a *relative* name
+    // and became `<root>/C:/elsewhere` — inside the root, **accepted**. The same
+    // tool argument was refused on one host and accepted on another.
+    //
+    // It is now always refused. Which branch refuses it differs by host and that
+    // is fine — on Windows containment already rejects it, on POSIX the explicit
+    // relative-path check does — so assert the invariant (it is refused) plus the
+    // exact reason on the host where that branch is the one that fires.
+    const root = path.resolve('C:/ws')
+    const reject = /absolute path|resolves outside the workspace root/u
+    expect(() => containedJoin(root, 'C:/elsewhere')).toThrow(reject)
+    expect(() => containedJoin(root, 'C:\\elsewhere')).toThrow(reject)
+    if (path.sep === '/') {
+      // POSIX has no drive concept, so `path.resolve` would have treated the
+      // argument as relative: the explicit check is the only thing rejecting it.
+      expect(() => containedJoin(root, 'C:/elsewhere')).toThrow(/absolute path/u)
+    }
   })
 })
 

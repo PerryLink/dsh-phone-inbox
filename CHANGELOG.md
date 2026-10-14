@@ -6,6 +6,31 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Fixed
+
+- **Path handling no longer depends on which host reads the message.** Three
+  platform-specific `node:path` calls broke the module's own contract — that a
+  path written in *either* separator convention must be accepted on *any* host —
+  and all three passed on Windows while failing on Linux CI:
+
+  - `normalizeCaptured` used `path.normalize`, which folds the *other*
+    convention into this host's (on Windows a POSIX path came back with `\`). It
+    now collapses repeated separators and `.`/`..` segments while preserving the
+    convention the path was written in.
+  - `isAbsolutePath` fell through to `path.isAbsolute`, which returns `false`
+    for `C:\Users\…` on POSIX — so a Windows path read on Linux was judged
+    invalid and **every marker on that line was dropped**. The drive form
+    (`^[A-Za-z]:[\\/]`) is now recognized explicitly, on every host.
+  - `containedJoin` relied on `path.resolve` to decide whether `subdir` was
+    absolute, so `C:/elsewhere` was refused on Windows but silently accepted as
+    a relative name on POSIX. A drive-absolute `subdir` is now refused on every
+    host, because the argument is required to be relative.
+
+  Note on verification: this class of defect is invisible to the Windows test
+  suite (all 94 tests passed locally both before and after). It was found and
+  confirmed by CI on Linux (`##[error]AssertionError: expected [] to have a
+  length of 1 but got +0`).
+
 ## [0.1.0] - 2026-10-13
 
 ### Added

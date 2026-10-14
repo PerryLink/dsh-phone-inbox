@@ -6,6 +6,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-10-14
+
 ### Fixed
 
 - **Path handling no longer depends on which host reads the message.** Three

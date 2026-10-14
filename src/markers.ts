@@ -151,13 +151,18 @@ export function createMarkerMatcher(markers: ResolvedConfig['markers']): MarkerM
 /**
  * Normalize a captured path: trim surrounding whitespace, trim a single layer
  * of quoting, strip trailing separators and trailing end-of-sentence
- * punctuation, then normalize. The bridge's text is prose, so the capture can
- * carry a trailing period the path does not have.
+ * punctuation, then collapse separator and `.`/`..` noise **without changing
+ * the separator convention**.
  *
- * `path.normalize` is the only separator handling applied: on Windows it folds
- * `/` to `\`, and on POSIX it leaves a `/` path alone. Folding unconditionally
- * would corrupt a POSIX path in a message that a Windows host happens to be
- * reading.
+ * ⚠️ Why not `path.normalize`: it is platform-specific, so it folds the *other*
+ * convention to this host's. On POSIX it rewrites `C:\Users\...\x.csv` to
+ * `C:/Users/.../x.csv`; on Windows it rewrites `/home/u/x.csv` to
+ * `\home\u\x.csv`. Either way `hostPath` would stop being the path the bridge
+ * actually wrote — and accepting a path written in the other convention is the
+ * whole point of the contract below (a Windows host must read a POSIX path and
+ * vice versa). The folding here is therefore hand-rolled and
+ * separator-preserving. Caught by CI on Linux, where a Windows-shaped fixture
+ * came back rewritten and the marker no longer matched.
  * @param raw - the first capturing group of the path wording.
  * @returns the normalized path (empty when nothing usable remains).
  */
@@ -170,7 +175,43 @@ export function normalizeCaptured(raw: string): string {
   // wrote; a trailing separator is not either (the captured value is a file).
   value = value.replace(/[.,;:。，、;!?！？)\]}>]+$/u, '').replace(/[\\/]+$/u, '')
   if (value === '') return ''
-  return path.normalize(value)
+  return collapsePath(value)
+}
+
+/**
+ * Collapse repeated separators and `.`/`..` segments while preserving whichever
+ * separator the input used. Mixed input keeps each segment's own separator, so a
+ * path is never rewritten into a convention its author did not use.
+ * @param value - a non-empty captured path.
+ * @returns the collapsed path.
+ */
+function collapsePath(value: string): string {
+  const isSeparator = (char: string): boolean => char === '/' || char === '\\'
+  // Preserve a leading separator run verbatim: POSIX root `/`, or a UNC `\\host`
+  // prefix. Rewriting it would change which root the path names.
+  let leading = ''
+  let rest = value
+  while (rest !== '' && isSeparator(rest.charAt(0))) {
+    leading += rest.charAt(0)
+    rest = rest.slice(1)
+  }
+  const segments: string[] = []
+  for (const segment of rest.split(/[\\/]+/u)) {
+    if (segment === '' || segment === '.') continue
+    if (segment === '..' && segments.length > 0 && segments[segments.length - 1] !== '..') {
+      segments.pop()
+      continue
+    }
+    segments.push(segment)
+  }
+  // Join with the convention the path itself used. The separator to use is read
+  // from the ORIGINAL value, not from the remainder: a segment can itself begin
+  // with the separator, so `split` on the remainder loses it (`C:\a\.b` splits to
+  // `['C:', 'a', '.b']` and the backslash is gone).
+  const separator = leading !== '' ? leading.charAt(0) : (value.match(/[\\/]/u)?.[0] ?? '/')
+  const prefix = leading !== '' ? leading : ''
+  if (segments.length === 0) return prefix
+  return prefix + segments.join(separator)
 }
 
 /**

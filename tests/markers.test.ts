@@ -133,11 +133,27 @@ describe('marker matching', () => {
     expect(textPartsOf({ type: 'text', text: 'not an array' })).toEqual([])
   })
 
-  it('normalizes surrounding quotes and trailing separators, and folds separators only as the platform does', () => {
-    const posix = pathModule.normalize('/tmp/a.csv')
-    expect(normalizeCaptured('"/tmp/a.csv"')).toBe(posix)
-    expect(normalizeCaptured("'/tmp/a.csv'")).toBe(posix)
-    expect(normalizeCaptured('/tmp/dir/')).toBe(pathModule.normalize('/tmp/dir'))
+  it('normalizes surrounding quotes and trailing separators, and preserves the separator convention', () => {
+    // The old contract here was "fold separators only as the platform does",
+    // implemented with `path.normalize`. That was wrong in both directions: on
+    // POSIX it rewrote a Windows path's `\` to `/`, and on Windows it rewrote a
+    // POSIX path's `/` to `\`, so `hostPath` stopped being the path the bridge
+    // wrote. CI on Linux caught it (a Windows-shaped fixture no longer matched).
+    // Both conventions must survive on any host, so assert literals, not
+    // `path.normalize`.
+    expect(normalizeCaptured('"/tmp/a.csv"')).toBe('/tmp/a.csv')
+    expect(normalizeCaptured("'/tmp/a.csv'")).toBe('/tmp/a.csv')
+    expect(normalizeCaptured('/tmp/dir/')).toBe('/tmp/dir')
+    // A Windows path read on any host keeps backslashes; a POSIX path keeps
+    // forward slashes. Neither is rewritten into the other.
+    expect(normalizeCaptured('C:\\Users\\somebody\\.dsh-wechat\\tempfile\\a.csv'))
+      .toBe('C:\\Users\\somebody\\.dsh-wechat\\tempfile\\a.csv')
+    expect(normalizeCaptured('/var/tmp/a.csv')).toBe('/var/tmp/a.csv')
+    // Collapsing still happens — repeated separators and `.`/`..` segments go —
+    // it is only the convention that is preserved.
+    expect(normalizeCaptured('/tmp//dir/./a.csv')).toBe('/tmp/dir/a.csv')
+    expect(normalizeCaptured('/tmp/dir/../other/a.csv')).toBe('/tmp/other/a.csv')
+    expect(normalizeCaptured('C:\\tmp\\\\dir\\.\\a.csv')).toBe('C:\\tmp\\dir\\a.csv')
   })
 
   it('accepts a custom wording, so a bridge change is a config edit', () => {

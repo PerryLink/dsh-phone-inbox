@@ -66,15 +66,43 @@ export function contains(root: string, target: string): Containment {
   return { inside, target: resolvedTarget, root: resolvedRoot }
 }
 
+/** A Windows drive prefix in either separator convention (`C:`, `c:/`). */
+const DRIVE_PREFIX = /^[A-Za-z]:[\\/]/u
+
+/**
+ * Whether a value is absolute in the *other* platform's convention. `path.resolve`
+ * is platform-specific, so a drive-absolute value is only treated as absolute on
+ * Windows; on POSIX it silently becomes a directory name (`C:/elsewhere` →
+ * `<root>/C:/elsewhere`). The plugin's quarantine discipline must not depend on
+ * which host it runs on, so this makes the check explicit.
+ * @param value - the candidate path.
+ * @returns `true` for a drive-absolute value.
+ */
+function isDriveAbsolute(value: string): boolean {
+  return DRIVE_PREFIX.test(value)
+}
+
 /**
  * Join a relative directory under a root, refusing an escape. Used for the
  * `subdir` tool argument, which the model also controls.
+ *
+ * The argument is required to be **relative**, on every platform. A
+ * drive-absolute value is therefore refused even where `path.resolve` would have
+ * quietly treated it as a relative name — otherwise the same tool argument would
+ * be rejected on Windows and accepted on Linux, and containment would depend on
+ * the host rather than on the argument.
  * @param root - the containing directory (the session workspace).
  * @param relative - the caller-supplied relative directory.
  * @returns the resolved absolute directory.
- * @throws when the joined path escapes `root`.
+ * @throws when `relative` is absolute, or when the joined path escapes `root`.
  */
 export function containedJoin(root: string, relative: string): string {
+  const resolved = path.resolve(root)
+  if (isDriveAbsolute(relative) && !isDriveAbsolute(resolved)) {
+    throw new Error(
+      `subdir ${JSON.stringify(relative)} is an absolute path; a relative subdirectory is required under the workspace root ${JSON.stringify(resolved)}`,
+    )
+  }
   const joined = path.resolve(root, relative)
   const check = contains(root, joined)
   if (!check.inside) {

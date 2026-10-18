@@ -95,7 +95,7 @@
     "@types/node": "^22.20.1",
     "tsdown": "^0.22.14",
     "typescript": "^5.9.3",
-    "vitest": "^3.2.7",
+    "vitest": "^5.0.5",
     "@deepseek-ai/dsh-working-directory": "0.2.1-rc.2"
   }
 }

@@ -1,10 +1,21 @@
 # dsh-phone-inbox
 
+[English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
+
 本会话的「手机（微信桥）入站附件」收件箱：列出**这次对话**真正收到的附件，并按需把某一条取进工作区。
 
 ![Terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-hero.png)
 
 ![Animated terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-demo.gif)
+
+## Install & uninstall
+
+```sh
+dsh plugin --profile <name> add dsh-phone-inbox
+dsh plugin --profile <name> remove dsh-phone-inbox
+```
+
+本插件**没有任何运行时依赖**（`dependencies` 为空）。它唯一的 peer 是编译所依赖的宿主包，见 `package.json` 的 `peerDependencies`。
 
 ## The problem this closes
 
@@ -39,15 +50,6 @@ inbox_adopt { "path": "<inbox_list 给出的路径>" }
 ```
 
 `inbox_adopt` 会返回 `relativePath`（例如 `phone-inbox/材料.csv`）。把它交给强制工作区的工具（例如 `data_profile`）；原始宿主路径只交给那些接受任意绝对路径的消费方。
-
-## Install & uninstall
-
-```sh
-dsh plugin --profile <name> add dsh-phone-inbox
-dsh plugin --profile <name> remove dsh-phone-inbox
-```
-
-本插件**没有任何运行时依赖**（`dependencies` 为空）。它唯一的 peer 是编译所依赖的宿主包，见 `package.json` 的 `peerDependencies`。
 
 ## Compatibility
 

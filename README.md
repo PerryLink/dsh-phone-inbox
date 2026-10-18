@@ -1,10 +1,21 @@
 # dsh-phone-inbox
 
+[English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
+
 The session's inbound phone (WeChat bridge) attachment inbox: list the attachments **this conversation** actually received, and adopt one into the workspace on demand.
 
 ![Terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-hero.png)
 
 ![Animated terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-demo.gif)
+
+## Install & uninstall
+
+```sh
+dsh plugin --profile <name> add dsh-phone-inbox
+dsh plugin --profile <name> remove dsh-phone-inbox
+```
+
+The plugin has **no runtime dependencies** (`dependencies` is empty). Its only peers are the host packages it is built against; see the `peerDependencies` block in `package.json`.
 
 ## The problem this closes
 
@@ -39,15 +50,6 @@ inbox_adopt { "path": "<the path from inbox_list>" }
 ```
 
 `inbox_adopt` returns `relativePath` (for example `phone-inbox/材料.csv`). Pass **that** to a workspace-confined tool such as `data_profile`; pass the original host path only to consumers that accept any absolute path.
-
-## Install & uninstall
-
-```sh
-dsh plugin --profile <name> add dsh-phone-inbox
-dsh plugin --profile <name> remove dsh-phone-inbox
-```
-
-The plugin has **no runtime dependencies** (`dependencies` is empty). Its only peers are the host packages it is built against; see the `peerDependencies` block in `package.json`.
 
 ## Compatibility
 

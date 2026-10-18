@@ -1,10 +1,21 @@
 # dsh-phone-inbox
 
+[English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
+
 इस सत्र का फ़ोन (WeChat ब्रिज) इनबाउंड अटैचमेंट इनबॉक्स: **इस बातचीत** को वास्तव में मिले अटैचमेंट की सूची दें, और माँगे जाने पर एक को कार्यक्षेत्र में ले आएँ।
 
 ![Terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-hero.png)
 
 ![Animated terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-demo.gif)
+
+## Install & uninstall
+
+```sh
+dsh plugin --profile <name> add dsh-phone-inbox
+dsh plugin --profile <name> remove dsh-phone-inbox
+```
+
+इस प्लगइन की **कोई रनटाइम निर्भरता नहीं है** (`dependencies` खाली है)। इसके एकमात्र पीयर वे होस्ट पैकेज हैं जिनके विरुद्ध यह बनता है; `package.json` का `peerDependencies` ब्लॉक देखें।
 
 ## The problem this closes
 
@@ -39,15 +50,6 @@ inbox_adopt { "path": "<the path from inbox_list>" }
 ```
 
 `inbox_adopt` `relativePath` लौटाता है (जैसे `phone-inbox/材料.csv`)। **वही** `data_profile` जैसे कार्यक्षेत्र-सीमित उपकरण को दें; मूल होस्ट पथ केवल उन उपभोक्ताओं को दें जो कोई भी निरपेक्ष पथ स्वीकार करते हैं।
-
-## Install & uninstall
-
-```sh
-dsh plugin --profile <name> add dsh-phone-inbox
-dsh plugin --profile <name> remove dsh-phone-inbox
-```
-
-इस प्लगइन की **कोई रनटाइम निर्भरता नहीं है** (`dependencies` खाली है)। इसके एकमात्र पीयर वे होस्ट पैकेज हैं जिनके विरुद्ध यह बनता है; `package.json` का `peerDependencies` ब्लॉक देखें।
 
 ## Compatibility
 

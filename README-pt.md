@@ -1,10 +1,21 @@
 # dsh-phone-inbox
 
+[English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
+
 A caixa de entrada de anexos do telefone (ponte do WeChat) desta sessão: liste os anexos que **esta conversa** realmente recebeu e adote um no espaço de trabalho quando pedido.
 
 ![Terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-hero.png)
 
 ![Animated terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-demo.gif)
+
+## Install & uninstall
+
+```sh
+dsh plugin --profile <name> add dsh-phone-inbox
+dsh plugin --profile <name> remove dsh-phone-inbox
+```
+
+O plugin **não tem dependências de runtime** (`dependencies` está vazio). Seus únicos pares são os pacotes hospedeiros contra os quais é compilado; veja o bloco `peerDependencies` em `package.json`.
 
 ## The problem this closes
 
@@ -39,15 +50,6 @@ inbox_adopt { "path": "<the path from inbox_list>" }
 ```
 
 `inbox_adopt` devolve `relativePath` (por exemplo `phone-inbox/材料.csv`). Passe **esse** caminho a uma ferramenta confinada ao espaço de trabalho, como `data_profile`; passe o caminho hospedeiro original apenas a consumidores que aceitam qualquer caminho absoluto.
-
-## Install & uninstall
-
-```sh
-dsh plugin --profile <name> add dsh-phone-inbox
-dsh plugin --profile <name> remove dsh-phone-inbox
-```
-
-O plugin **não tem dependências de runtime** (`dependencies` está vazio). Seus únicos pares são os pacotes hospedeiros contra os quais é compilado; veja o bloco `peerDependencies` em `package.json`.
 
 ## Compatibility
 

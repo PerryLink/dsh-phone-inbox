@@ -2,6 +2,10 @@
 
 本会话的「手机（微信桥）入站附件」收件箱：列出**这次对话**真正收到的附件，并按需把某一条取进工作区。
 
+![Terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-hero.png)
+
+![Animated terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-demo.gif)
+
 ## The problem this closes
 
 `dsh-wechat` 把手机发来的媒体存到 `~/.dsh-wechat/tempfile/` —— 在会话工作区**之外** —— 并把绝对路径写进一个纯文本块。由此产生两个后果，而用户都看不见：
@@ -52,7 +56,7 @@ dsh plugin --profile <name> remove dsh-phone-inbox
 | Node.js | `^22.19.0 \|\| >=24.0.0` |
 | DSH | `>=0.2.1-alpha.1` |
 
-宿主 peer 区间是生态规范的六段 OR 区间（见 `dsh-plugin-kit/data/peer-range.json`）。宿主会在 preflight 时评估 `peerDependencies`，并把区间不接受的插件行**静默 disabled** —— 所以错误的区间看起来就像「插件挂上了但什么都不做」。`engines.dsh` 只是声明性字段，宿主不读它。
+宿主 peer 区间是生态规范的六段 OR 区间（见 `dsh-plugin-kit/data/peer-range.json`）。宿主会在 preflight 时评估 `peerDependencies`，并把区间不接受的插件行**静默 disabled** —— 所以错误的区间看起来就像「插件挂上了但什么都不做」。宿主也会单独裁决 `engines.dsh`；即使 peer 区间接受该版本，这里的区间不匹配同样可能让插件行被禁用。
 
 ## Configuration
 

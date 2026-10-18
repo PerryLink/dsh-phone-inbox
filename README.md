@@ -2,6 +2,10 @@
 
 The session's inbound phone (WeChat bridge) attachment inbox: list the attachments **this conversation** actually received, and adopt one into the workspace on demand.
 
+![Terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-hero.png)
+
+![Animated terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-demo.gif)
+
 ## The problem this closes
 
 `dsh-wechat` saves inbound phone media to `~/.dsh-wechat/tempfile/` — outside the session workspace — and writes the absolute path into a plain text block. Two consequences follow, and neither is visible to the user:
@@ -52,7 +56,7 @@ The plugin has **no runtime dependencies** (`dependencies` is empty). Its only p
 | Node.js | `^22.19.0 \|\| >=24.0.0` |
 | DSH | `>=0.2.1-alpha.1` |
 
-The host peer range is the ecosystem's canonical six-clause OR range (see `dsh-plugin-kit/data/peer-range.json`). The host evaluates `peerDependencies` at preflight and **silently disables** a plugin row whose range does not admit the running version, so a wrong range looks like "the plugin mounted and does nothing". `engines.dsh` is declarative only — the host does not read it.
+The host peer range is the ecosystem's canonical six-clause OR range (see `dsh-plugin-kit/data/peer-range.json`). The host evaluates `peerDependencies` at preflight and **silently disables** a plugin row whose range does not admit the running version, so a wrong range looks like "the plugin mounted and does nothing". The host also adjudicates `engines.dsh` independently; a mismatch there can disable the row even when the peer range admits the version.
 
 ## Configuration
 

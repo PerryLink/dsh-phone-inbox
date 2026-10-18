@@ -1,0 +1,14 @@
+[
+  {
+    "path": "docs/assets/dsh-phone-inbox-hero.png",
+    "kind": "hero",
+    "alt": "dsh-phone-inbox terminal output",
+    "caption": "Real inbox_list/adopt output; 94 tests passing."
+  },
+  {
+    "path": "docs/assets/dsh-phone-inbox-demo.gif",
+    "kind": "demo",
+    "alt": "Animated dsh-phone-inbox terminal session",
+    "caption": "The same run, assembled line by line."
+  }
+]

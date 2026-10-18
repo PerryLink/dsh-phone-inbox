@@ -2,6 +2,10 @@
 
 La bandeja de entrada de adjuntos del teléfono (puente de WeChat) de esta sesión: enumera los adjuntos que **esta conversación** recibió realmente y adopta uno en el espacio de trabajo cuando se pida.
 
+![Terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-hero.png)
+
+![Animated terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-demo.gif)
+
 ## The problem this closes
 
 `dsh-wechat` guarda los medios entrantes del teléfono en `~/.dsh-wechat/tempfile/` — fuera del espacio de trabajo de la sesión — y escribe la ruta absoluta en un bloque de texto plano. Se siguen dos consecuencias, y ninguna es visible para el usuario:
@@ -52,7 +56,7 @@ El plugin **no tiene dependencias en tiempo de ejecución** (`dependencies` est�
 | Node.js | `^22.19.0 \|\| >=24.0.0` |
 | DSH | `>=0.2.1-alpha.1` |
 
-El rango de pares del anfitrión es el rango OR canónico de seis cláusulas del ecosistema (véase `dsh-plugin-kit/data/peer-range.json`). El anfitrión evalúa `peerDependencies` en el preflight y **desactiva silenciosamente** una fila de plugin cuyo rango no admita la versión en ejecución, así que un rango equivocado parece «el plugin se montó y no hace nada». `engines.dsh` es solo declarativo: el anfitrión no lo lee.
+El rango de pares del anfitrión es el rango OR canónico de seis cláusulas del ecosistema (véase `dsh-plugin-kit/data/peer-range.json`). El anfitrión evalúa `peerDependencies` en el preflight y **desactiva silenciosamente** una fila de plugin cuyo rango no admita la versión en ejecución, así que un rango equivocado parece «el plugin se montó y no hace nada». El anfitrión también evalúa `engines.dsh` de forma independiente; una discrepancia ahí puede desactivar la fila aunque el rango de pares admita la versión.
 
 ## Configuration
 

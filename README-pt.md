@@ -2,6 +2,10 @@
 
 A caixa de entrada de anexos do telefone (ponte do WeChat) desta sessão: liste os anexos que **esta conversa** realmente recebeu e adote um no espaço de trabalho quando pedido.
 
+![Terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-hero.png)
+
+![Animated terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-demo.gif)
+
 ## The problem this closes
 
 O `dsh-wechat` grava as mídias recebidas do telefone em `~/.dsh-wechat/tempfile/` — fora do espaço de trabalho da sessão — e escreve o caminho absoluto num bloco de texto simples. Duas consequências decorrem disso, e nenhuma é visível ao usuário:
@@ -52,7 +56,7 @@ O plugin **não tem dependências de runtime** (`dependencies` está vazio). Seu
 | Node.js | `^22.19.0 \|\| >=24.0.0` |
 | DSH | `>=0.2.1-alpha.1` |
 
-O intervalo de pares do hospedeiro é o intervalo OR canônico de seis cláusulas do ecossistema (veja `dsh-plugin-kit/data/peer-range.json`). O hospedeiro avalia `peerDependencies` no preflight e **desativa silenciosamente** uma linha de plugin cujo intervalo não admita a versão em execução, então um intervalo errado parece «o plugin montou e não faz nada». `engines.dsh` é apenas declarativo: o hospedeiro não o lê.
+O intervalo de pares do hospedeiro é o intervalo OR canônico de seis cláusulas do ecossistema (veja `dsh-plugin-kit/data/peer-range.json`). O hospedeiro avalia `peerDependencies` no preflight e **desativa silenciosamente** uma linha de plugin cujo intervalo não admita a versão em execução, então um intervalo errado parece «o plugin montou e não faz nada». O hospedeiro também avalia `engines.dsh` de forma independente; uma divergência ali pode desativar a linha mesmo que o intervalo de pares aceite a versão.
 
 ## Configuration
 

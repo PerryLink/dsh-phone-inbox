@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.3] - 2026-10-18
+
+### Changed
+
+- Add a 1280×720 hero and a 960×540, 4-second terminal GIF; `screenshots.json` and `capture.json` describe them.
+
+## [0.1.2] - 2026-10-18
+
+### Fixed
+
+- **README no longer says `engines.dsh` is unread.** The host adjudicates it independently; all five languages now state that a mismatch can disable the row even when the peer range admits the version. Added the `dsh-working-directory` devDependency.
+
 All notable changes to `dsh-phone-inbox` are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).

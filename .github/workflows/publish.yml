@@ -98,7 +98,16 @@ jobs:
           fi
           echo "::notice::dsh-phone-inbox@${version} is staged and awaits maintainer approval with 2FA"
           npm stage list "dsh-phone-inbox" || true
+      # workflow_dispatch has no tag ref, so action-gh-release cannot infer one
+      # and fails with "GitHub Releases requires a tag" after npm has already
+      # published (the tag check above deliberately allows a dispatch). Resolve
+      # the tag from the version being released; the tag is created if missing.
+      - name: Resolve the release tag
+        id: release-tag
+        shell: bash
+        run: echo "tag=v$(node -p "require('./package.json').version")" >> "${GITHUB_OUTPUT}"
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v3
         with:
+          tag_name: ${{ steps.release-tag.outputs.tag }}
           generate_release_notes: true

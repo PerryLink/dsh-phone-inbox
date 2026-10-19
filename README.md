@@ -67,7 +67,30 @@ These are the plugin's real entry points; install once, then call one.
 
 #### Detailed example
 
-- `inbox_list`
+**Command**
+
+~~~sh
+inbox_adopt
+~~~
+
+**Input**
+
+~~~json
+{
+  "path": "/tmp/dsh-test-phone-inbox-acceptance-5AoMHy/.dsh-wechat/tempfile/1792414010975-0a67121b-__.csv"
+}
+~~~
+
+**Output**
+
+~~~text
+{
+  "relativePath": "phone-inbox/材料.csv",
+  "copyMethod": "node-fs"
+}
+~~~
+
+*Observed from `plugins/dsh-phone-inbox/scripts/acceptance.mjs:134-147`*
 
 #### Brief examples
 

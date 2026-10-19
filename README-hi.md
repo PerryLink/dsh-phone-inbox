@@ -67,7 +67,30 @@ inbox_adopt { "path": "<the path from inbox_list>" }
 
 #### विस्तृत उदाहरण
 
-- `inbox_list`
+**कमांड**
+
+~~~sh
+inbox_adopt
+~~~
+
+**इनपुट**
+
+~~~json
+{
+  "path": "/tmp/dsh-test-phone-inbox-acceptance-5AoMHy/.dsh-wechat/tempfile/1792414010975-0a67121b-__.csv"
+}
+~~~
+
+**आउटपुट**
+
+~~~text
+{
+  "relativePath": "phone-inbox/材料.csv",
+  "copyMethod": "node-fs"
+}
+~~~
+
+*स्रोत `plugins/dsh-phone-inbox/scripts/acceptance.mjs:134-147`*
 
 #### संक्षिप्त उदाहरण
 

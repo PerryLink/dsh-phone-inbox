@@ -67,7 +67,30 @@ inbox_adopt { "path": "<inbox_list 给出的路径>" }
 
 #### 详细示例
 
-- `inbox_list`
+**命令**
+
+~~~sh
+inbox_adopt
+~~~
+
+**输入**
+
+~~~json
+{
+  "path": "/tmp/dsh-test-phone-inbox-acceptance-5AoMHy/.dsh-wechat/tempfile/1792414010975-0a67121b-__.csv"
+}
+~~~
+
+**输出**
+
+~~~text
+{
+  "relativePath": "phone-inbox/材料.csv",
+  "copyMethod": "node-fs"
+}
+~~~
+
+*来源 `plugins/dsh-phone-inbox/scripts/acceptance.mjs:134-147`*
 
 #### 简短示例
 

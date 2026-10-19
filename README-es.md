@@ -67,7 +67,30 @@ Son los puntos de entrada reales; instala y llama a uno.
 
 #### Ejemplo detallado
 
-- `inbox_list`
+**Comando**
+
+~~~sh
+inbox_adopt
+~~~
+
+**Entrada**
+
+~~~json
+{
+  "path": "/tmp/dsh-test-phone-inbox-acceptance-5AoMHy/.dsh-wechat/tempfile/1792414010975-0a67121b-__.csv"
+}
+~~~
+
+**Salida**
+
+~~~text
+{
+  "relativePath": "phone-inbox/材料.csv",
+  "copyMethod": "node-fs"
+}
+~~~
+
+*Observado en `plugins/dsh-phone-inbox/scripts/acceptance.mjs:134-147`*
 
 #### Ejemplos breves
 

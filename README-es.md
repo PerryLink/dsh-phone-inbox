@@ -92,6 +92,24 @@ inbox_adopt
 
 *Observado en `plugins/dsh-phone-inbox/scripts/acceptance.mjs:134-147`*
 
+#### Rama de fallo
+
+**Entrada**
+
+~~~text
+{"path":"/tmp/dsh-phone-inbox-example/workspace/local.csv"}
+~~~
+
+**Salida**
+
+~~~text
+phone-inbox could not adopt that attachment.
+reason: not-in-inbox
+/tmp/dsh-phone-inbox-example/workspace/local.csv is not inside the inbox directory /tmp/dsh-phone-inbox-example/inbox; this plugin only adopts files the bridge saved there
+~~~
+
+*Observado en `plugins/dsh-phone-inbox/src/provider-base.ts:443-449; plugins/dsh-phone-inbox/src/render.ts:108-115; plugins/dsh-phone-inbox/tests/integration.test.ts:359-368`*
+
 #### Ejemplos breves
 
 - `inbox_adopt`

@@ -92,6 +92,24 @@ inbox_adopt
 
 *来源 `plugins/dsh-phone-inbox/scripts/acceptance.mjs:134-147`*
 
+#### 失败分支
+
+**输入**
+
+~~~text
+{"path":"/tmp/dsh-phone-inbox-example/workspace/local.csv"}
+~~~
+
+**输出**
+
+~~~text
+phone-inbox could not adopt that attachment.
+reason: not-in-inbox
+/tmp/dsh-phone-inbox-example/workspace/local.csv is not inside the inbox directory /tmp/dsh-phone-inbox-example/inbox; this plugin only adopts files the bridge saved there
+~~~
+
+*来源 `plugins/dsh-phone-inbox/src/provider-base.ts:443-449; plugins/dsh-phone-inbox/src/render.ts:108-115; plugins/dsh-phone-inbox/tests/integration.test.ts:359-368`*
+
 #### 简短示例
 
 - `inbox_adopt`

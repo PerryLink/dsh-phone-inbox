@@ -4,9 +4,10 @@
 
 La bandeja de entrada de adjuntos del teléfono (puente de WeChat) de esta sesión: enumera los adjuntos que **esta conversación** recibió realmente y adopta uno en el espacio de trabajo cuando se pida.
 
-![Terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-hero.png)
+![Diagrama de flujo de dsh-phone-inbox: instalar → abrir panel → actuar.](docs/assets/dsh-phone-inbox-flow.svg)
 
-![Animated terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-demo.gif)
+*Resumen del flujo: instalar → abrir panel → actuar. Los ejemplos siguientes usan la superficie de comandos real.*
+
 
 ## Install & uninstall
 
@@ -59,6 +60,18 @@ inbox_adopt { "path": "<the path from inbox_list>" }
 | DSH | `>=0.2.1-alpha.1` |
 
 El rango de pares del anfitrión es el rango OR canónico de seis cláusulas del ecosistema (véase `dsh-plugin-kit/data/peer-range.json`). El anfitrión evalúa `peerDependencies` en el preflight y **desactiva silenciosamente** una fila de plugin cuyo rango no admita la versión en ejecución, así que un rango equivocado parece «el plugin se montó y no hace nada». El anfitrión también evalúa `engines.dsh` de forma independiente; una discrepancia ahí puede desactivar la fila aunque el rango de pares admita la versión.
+
+### Ejemplos
+
+Son los puntos de entrada reales; instala y llama a uno.
+
+#### Ejemplo detallado
+
+- `inbox_list`
+
+#### Ejemplos breves
+
+- `inbox_adopt`
 
 ## Configuration
 

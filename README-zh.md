@@ -4,9 +4,10 @@
 
 本会话的「手机（微信桥）入站附件」收件箱：列出**这次对话**真正收到的附件，并按需把某一条取进工作区。
 
-![Terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-hero.png)
+![dsh-phone-inbox 工作流图：安装 → 打开面板 → 操作。](docs/assets/dsh-phone-inbox-flow.svg)
 
-![Animated terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-demo.gif)
+*工作流概览：安装 → 打开面板 → 操作。下面的示例使用实际命令面。*
+
 
 ## Install & uninstall
 
@@ -59,6 +60,18 @@ inbox_adopt { "path": "<inbox_list 给出的路径>" }
 | DSH | `>=0.2.1-alpha.1` |
 
 宿主 peer 区间是生态规范的六段 OR 区间（见 `dsh-plugin-kit/data/peer-range.json`）。宿主会在 preflight 时评估 `peerDependencies`，并把区间不接受的插件行**静默 disabled** —— 所以错误的区间看起来就像「插件挂上了但什么都不做」。宿主也会单独裁决 `engines.dsh`；即使 peer 区间接受该版本，这里的区间不匹配同样可能让插件行被禁用。
+
+### 示例
+
+以下为插件真实入口；安装后调用一个即可。
+
+#### 详细示例
+
+- `inbox_list`
+
+#### 简短示例
+
+- `inbox_adopt`
 
 ## Configuration
 

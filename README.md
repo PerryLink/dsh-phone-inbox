@@ -4,9 +4,10 @@
 
 The session's inbound phone (WeChat bridge) attachment inbox: list the attachments **this conversation** actually received, and adopt one into the workspace on demand.
 
-![Terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-hero.png)
+![Workflow diagram for dsh-phone-inbox: install → open panel → act.](docs/assets/dsh-phone-inbox-flow.svg)
 
-![Animated terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-demo.gif)
+*Workflow overview: install → open panel → act. The examples below use the real command surface.*
+
 
 ## Install & uninstall
 
@@ -59,6 +60,18 @@ inbox_adopt { "path": "<the path from inbox_list>" }
 | DSH | `>=0.2.1-alpha.1` |
 
 The host peer range is the ecosystem's canonical six-clause OR range (see `dsh-plugin-kit/data/peer-range.json`). The host evaluates `peerDependencies` at preflight and **silently disables** a plugin row whose range does not admit the running version, so a wrong range looks like "the plugin mounted and does nothing". The host also adjudicates `engines.dsh` independently; a mismatch there can disable the row even when the peer range admits the version.
+
+### Examples
+
+These are the plugin's real entry points; install once, then call one.
+
+#### Detailed example
+
+- `inbox_list`
+
+#### Brief examples
+
+- `inbox_adopt`
 
 ## Configuration
 

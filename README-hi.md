@@ -4,9 +4,10 @@
 
 इस सत्र का फ़ोन (WeChat ब्रिज) इनबाउंड अटैचमेंट इनबॉक्स: **इस बातचीत** को वास्तव में मिले अटैचमेंट की सूची दें, और माँगे जाने पर एक को कार्यक्षेत्र में ले आएँ।
 
-![Terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-hero.png)
+![dsh-phone-inbox कार्यप्रवाह आरेख: इंस्टॉल → पैनल खोलें → कार्य।](docs/assets/dsh-phone-inbox-flow.svg)
 
-![Animated terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-demo.gif)
+*कार्यप्रवाह: इंस्टॉल → पैनल खोलें → कार्य। नीचे के उदाहरण वास्तविक कमांड सतह का उपयोग करते हैं।*
+
 
 ## Install & uninstall
 
@@ -59,6 +60,18 @@ inbox_adopt { "path": "<the path from inbox_list>" }
 | DSH | `>=0.2.1-alpha.1` |
 
 होस्ट पीयर रेंज पारिस्थितिकी तंत्र की मानक छह-खंड OR रेंज है (`dsh-plugin-kit/data/peer-range.json` देखें)। होस्ट preflight पर `peerDependencies` का मूल्यांकन करता है और ऐसी प्लगइन पंक्ति को **चुपचाप disabled** कर देता है जिसकी रेंज चल रहे संस्करण को स्वीकार न करे, इसलिए गलत रेंज «प्लगइन माउंट हुआ और कुछ नहीं करता» जैसा दिखता है। होस्ट `engines.dsh` का भी स्वतंत्र रूप से निर्णय करता है; वहाँ असंगति होने पर पंक्ति disabled हो सकती है, भले ही peer रेंज संस्करण स्वीकार करे।
+
+### उदाहरण
+
+ये वास्तविक प्रवेश बिंदु हैं; इंस्टॉल के बाद एक चलाएँ।
+
+#### विस्तृत उदाहरण
+
+- `inbox_list`
+
+#### संक्षिप्त उदाहरण
+
+- `inbox_adopt`
 
 ## Configuration
 

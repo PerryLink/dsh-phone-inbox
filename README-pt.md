@@ -4,9 +4,10 @@
 
 A caixa de entrada de anexos do telefone (ponte do WeChat) desta sessão: liste os anexos que **esta conversa** realmente recebeu e adote um no espaço de trabalho quando pedido.
 
-![Terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-hero.png)
+![Diagrama de fluxo de dsh-phone-inbox: instalar → abrir painel → agir.](docs/assets/dsh-phone-inbox-flow.svg)
 
-![Animated terminal demo of dsh-phone-inbox](docs/assets/dsh-phone-inbox-demo.gif)
+*Visão geral do fluxo: instalar → abrir painel → agir. Os exemplos abaixo usam a superfície real de comandos.*
+
 
 ## Install & uninstall
 
@@ -59,6 +60,18 @@ inbox_adopt { "path": "<the path from inbox_list>" }
 | DSH | `>=0.2.1-alpha.1` |
 
 O intervalo de pares do hospedeiro é o intervalo OR canônico de seis cláusulas do ecossistema (veja `dsh-plugin-kit/data/peer-range.json`). O hospedeiro avalia `peerDependencies` no preflight e **desativa silenciosamente** uma linha de plugin cujo intervalo não admita a versão em execução, então um intervalo errado parece «o plugin montou e não faz nada». O hospedeiro também avalia `engines.dsh` de forma independente; uma divergência ali pode desativar a linha mesmo que o intervalo de pares aceite a versão.
+
+### Exemplos
+
+São os pontos de entrada reais; instale e chame um.
+
+#### Exemplo detalhado
+
+- `inbox_list`
+
+#### Exemplos breves
+
+- `inbox_adopt`
 
 ## Configuration
 

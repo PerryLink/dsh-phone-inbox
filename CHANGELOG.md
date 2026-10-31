@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.4] - 2026-10-31
+
+### Changed
+
+- Docs: document provider support (`dsh-wechat` optional, custom providers allowed); no code change.
+
 ## [0.1.3] - 2026-10-18
 
 ### Changed

@@ -1,5 +1,8 @@
 # dsh-phone-inbox
 
+> **Provider समर्थन:** inbox provider-agnostic है। डिफ़ॉल्ट adapter `dsh-wechat` के temp directory को पढ़ता है, पर custom provider दूसरा स्रोत दे सकता है; `dsh-wechat` वैकल्पिक है, package dependency नहीं।
+
+
 [English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
 
 इस सत्र का फ़ोन (WeChat ब्रिज) इनबाउंड अटैचमेंट इनबॉक्स: **इस बातचीत** को वास्तव में मिले अटैचमेंट की सूची दें, और माँगे जाने पर एक को कार्यक्षेत्र में ले आएँ।

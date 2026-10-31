@@ -1,5 +1,8 @@
 # dsh-phone-inbox
 
+> **Soporte de providers:** la inbox es agnóstica al provider. El adaptador por defecto lee el directorio temporal de `dsh-wechat`, pero un provider personalizado puede usar otra fuente; `dsh-wechat` es opcional, no una dependencia del paquete.
+
+
 [English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
 
 La bandeja de entrada de adjuntos del teléfono (puente de WeChat) de esta sesión: enumera los adjuntos que **esta conversación** recibió realmente y adopta uno en el espacio de trabajo cuando se pida.

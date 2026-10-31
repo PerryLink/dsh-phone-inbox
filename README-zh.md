@@ -1,5 +1,7 @@
 # dsh-phone-inbox
 
+> **Provider 支持：** 本 inbox 与 provider 解耦。默认适配器读取 `dsh-wechat` 临时目录，但自定义 provider 可以接其他来源；`dsh-wechat` 是可选项，不是包依赖。
+
 [English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
 
 本会话的「手机（微信桥）入站附件」收件箱：列出**这次对话**真正收到的附件，并按需把某一条取进工作区。

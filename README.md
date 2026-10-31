@@ -1,5 +1,8 @@
 # dsh-phone-inbox
 
+> **Provider support:** the inbox is provider-agnostic. The default adapter reads the `dsh-wechat` temp directory, but a custom provider can supply another source; `dsh-wechat` is optional, not a package dependency.
+
+
 [English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
 
 The session's inbound phone (WeChat bridge) attachment inbox: list the attachments **this conversation** actually received, and adopt one into the workspace on demand.

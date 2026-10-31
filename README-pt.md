@@ -1,5 +1,8 @@
 # dsh-phone-inbox
 
+> **Suporte a providers:** a inbox é agnóstica a provider. O adaptador padrão lê o diretório temporário do `dsh-wechat`, mas um provider personalizado pode usar outra fonte; `dsh-wechat` é opcional, não uma dependência do pacote.
+
+
 [English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
 
 A caixa de entrada de anexos do telefone (ponte do WeChat) desta sessão: liste os anexos que **esta conversa** realmente recebeu e adote um no espaço de trabalho quando pedido.

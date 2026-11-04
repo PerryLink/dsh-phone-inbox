@@ -144,9 +144,19 @@ export function apply(ctx: Context, config: PhoneInboxConfig = {}): void {
   // rules that prevent the predictable mistakes (re-deriving the path by hand;
   // handing a host path to a workspace-confined tool). Guarded so the plugin
   // still mounts on a host without the service.
+  // Reading an undeclared service property throws in cordis, so probe inside a
+  // try/catch instead of relying on optional chaining: a host without the
+  // service must still mount the plugin.
   const promptHost = ctx as unknown as { systemPrompt?: { section: (options: { name: string; order: number; text: string }) => unknown } }
-  if (typeof promptHost.systemPrompt?.section === 'function') {
-    const section = promptHost.systemPrompt.section.bind(promptHost.systemPrompt)
+  let promptSection: ((options: { name: string; order: number; text: string }) => unknown) | null = null
+  try {
+    const service = promptHost.systemPrompt
+    if (service && typeof service.section === 'function') promptSection = service.section.bind(service)
+  } catch {
+    promptSection = null
+  }
+  if (promptSection) {
+    const section = promptSection
     ctx.effect(() => {
       section({ name: SYSTEM_PROMPT_SECTION.name, order: SYSTEM_PROMPT_SECTION.order, text: systemPromptText() })
       return () => {}

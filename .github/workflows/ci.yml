@@ -29,8 +29,8 @@ jobs:
       - run: pnpm run typecheck
       - run: pnpm test
       - run: pnpm run build
-      # The family-standard gates. check:readmes also holds the four translated
-      # READMEs to the English one's section count, install command and
+      # The family-standard gates. check:readmes also holds the English README
+      # to the Chinese main one's section count, install command and
       # configuration keys; verify:artifacts additionally asserts the built
       # entry has no default export (a stray one makes the Loader discard
       # name/inject/Config/apply).
@@ -43,8 +43,8 @@ jobs:
       # neutralization). It builds its own fixture under $TMPDIR, so it needs no
       # WeChat account and no host state.
       - run: pnpm run acceptance
-      # The packed tarball carries the bundle, the patch and all five READMEs.
-      - name: The packed tarball carries the bundle, the patch and all five READMEs
+      # The packed tarball carries the bundle, the patch and the published README.
+      - name: The packed tarball carries the bundle, the patch and the published README
         shell: bash
         run: |
           set -euo pipefail
@@ -64,10 +64,6 @@ jobs:
             package/locale/zh.json \
             package/icon.svg \
             package/README.md \
-            package/README-zh.md \
-            package/README-es.md \
-            package/README-pt.md \
-            package/README-hi.md \
             package/CHANGELOG.md \
             package/SECURITY.md ; do
             grep -qx "$need" out/list.txt || { echo "missing: $need"; exit 1; }

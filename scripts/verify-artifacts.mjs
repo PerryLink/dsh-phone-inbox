@@ -16,10 +16,7 @@ const required = [
   'cordis.patch.yml',
   'LICENSE',
   'README.md',
-  'README-zh.md',
-  'README-es.md',
-  'README-pt.md',
-  'README-hi.md',
+  'README.en.md',
   'CHANGELOG.md',
   'SECURITY.md',
 ]

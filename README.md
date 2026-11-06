@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-phone-inbox-flow-dark.svg">
-  <img src="docs/assets/dsh-phone-inbox-flow-light.svg" width="100%" alt="dsh-phone-inbox 数据流：dsh-wechat tempfile → session/event 标记 → inbox_list → inbox_adopt → 工作区 phone-inbox/ 下的可寻址文件">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-phone-inbox-hero-zh-dark.webp">
+  <img src="docs/assets/dsh-phone-inbox-hero-zh-light.webp" width="100%" alt="dsh-phone-inbox 配图：左列是插件名与价值句；右侧是一份附件——桥落在工作区之外、磁盘名被压成 __.csv，标记里仍带着原名，经 inbox_adopt 的四道检查后成为工作区里可寻址的 phone-inbox/材料.csv。">
 </picture>
 
 # dsh-phone-inbox
@@ -35,6 +35,11 @@ dsh plugin --profile <name> add dsh-phone-inbox
 ## 它是什么
 
 `dsh-wechat` 把手机发来的媒体存到 `~/.dsh-wechat/tempfile/` —— 在会话工作区**之外** —— 并把绝对路径写进一条纯文本消息。`dsh-phone-inbox` 从这条消息里恢复出这次对话真正收到的附件清单（`inbox_list`），需要时把其中一条复制进工作区（`inbox_adopt`），沿途把桥压坏的文件名恢复回来。这补上两个用户看不见的缺口：强制工作区的工具（如 `dsh-data-quality`）会拒绝任何逃出会话工作区的路径（`path-escape`）；桥又把文件名里的非 ASCII 字符压成 `_`，`材料.csv` 落盘就成了 `__.csv`。它不新开通道，也不改变桥的行为：默认只认本会话自己的消息，不扫描共享目录。来源与 provider 解耦：默认适配器读 `dsh-wechat` 的临时目录，自定义 provider 也可以接别的来源，`dsh-wechat` 是可选来源、不是包依赖。
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-phone-inbox-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-phone-inbox-flow-v5-light.svg" width="100%" alt="dsh-phone-inbox 结构图：上半是 inbox_list 的只读汇流——桥的文本标记、结构化附件块与默认关闭的 tempdir 扫描汇入匹配、合并、stat、排序，再分叉成 items[]、emptyReason 与 { ok: false, reason }；下半是 inbox_adopt 的四道门禁竖梯，一次复制跨过工作区边界，按 ctx.fs.writeText 或 node:fs 两条写通道落到工作区的 relativePath。">
+</picture>
 
 ## 三步上手
 
@@ -326,8 +331,8 @@ pnpm run acceptance          # 端到端：探测 -> 列表 -> 取用 -> dsh-dat
 | `src/tools/*.ts` | `inbox_list` / `inbox_adopt` 两个 Consumer |
 | `scripts/acceptance.mjs` | 端到端验收：probe → list → adopt → `dsh-data-quality` |
 | `tests/` | vitest，按用例建独立的 inbox 目录 |
-| `docs/assets/` | 本 README 的深浅双版流程图 |
-| `scripts/gen-readme-assets.py` | 程序化生成 `docs/assets/dsh-phone-inbox-flow-{light,dark}.svg` |
+| `docs/assets/` | 本 README 的 hero 横幅与深浅双版结构图 |
+| `scripts/gen-readme-assets.py` | 程序化生成 `docs/assets/dsh-phone-inbox-hero-{zh,en}-{light,dark}.webp` 与 `docs/assets/dsh-phone-inbox-flow-v5-{light,dark}.svg` |
 
 配图由 [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) 程序化生成（Python + Pillow 字体探测），可重复执行：`python scripts/gen-readme-assets.py`。
 

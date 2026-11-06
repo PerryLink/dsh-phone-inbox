@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-phone-inbox-flow-dark.svg">
-  <img src="docs/assets/dsh-phone-inbox-flow-light.svg" width="100%" alt="Flujo de datos de dsh-phone-inbox: dsh-wechat tempfile → marcador en session/event → inbox_list → inbox_adopt → archivo en el espacio de trabajo phone-inbox/">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-phone-inbox-hero-en-dark.webp">
+  <img src="docs/assets/dsh-phone-inbox-hero-en-light.webp" width="100%" alt="dsh-phone-inbox: el nombre y las frases de valor a la izquierda; a la derecha, un adjunto —guardado fuera del espacio de trabajo como __.csv, con el nombre del remitente aún en el marcador— se convierte en una ruta direccionable dentro de phone-inbox/ tras las cuatro comprobaciones de inbox_adopt.">
 </picture>
 
 # dsh-phone-inbox
@@ -35,6 +35,11 @@ dsh plugin --profile <name> add dsh-phone-inbox
 ## Qué es
 
 `dsh-wechat` guarda los medios entrantes del teléfono en `~/.dsh-wechat/tempfile/` — fuera del espacio de trabajo de la sesión — y escribe la ruta absoluta en un mensaje de texto plano. `dsh-phone-inbox` recupera la lista de adjuntos que esta conversación recibió realmente (`inbox_list`), copia uno al espacio de trabajo cuando se pide (`inbox_adopt`) y, de paso, restaura el nombre que el puente destrozó. Cierra dos huecos que el usuario nunca ve: las herramientas confinadas al espacio de trabajo, como `dsh-data-quality`, rechazan cualquier ruta que escape de la sesión (`path-escape`), y el puente sustituye cada carácter no ASCII del nombre por `_`, así que un nombre chino acaba en disco como `__.csv`. No añade ningún canal nuevo ni cambia el puente: por defecto solo lee los mensajes de esta sesión y nunca escanea el directorio compartido. La fuente está desacoplada del provider: el adaptador por defecto lee el directorio temporal de `dsh-wechat`, un provider personalizado puede aportar otra fuente, y `dsh-wechat` es opcional, no una dependencia del paquete.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-phone-inbox-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-phone-inbox-flow-v5-light.svg" width="100%" alt="Estructura de dsh-phone-inbox: arriba, la confluencia de solo lectura de inbox_list —los marcadores de texto del puente, los bloques de adjuntos estructurados y el escaneo tempdir desactivado por defecto alimentan la coincidencia, la fusión, el stat y el orden, y luego se bifurcan en items[], emptyReason y { ok: false, reason }; abajo, la escalera de cuatro puertas de inbox_adopt, donde una sola copia cruza el límite del espacio de trabajo por ctx.fs.writeText o node:fs hasta el relativePath del espacio de trabajo.">
+</picture>
 
 ## Instalación en tres pasos
 
@@ -326,8 +331,8 @@ pnpm run acceptance          # de extremo a extremo: sonda -> lista -> adopción
 | `src/tools/*.ts` | Los dos consumidores `defineTool`, `inbox_list` / `inbox_adopt` |
 | `scripts/acceptance.mjs` | Aceptación de extremo a extremo: probe → list → adopt → `dsh-data-quality` |
 | `tests/` | vitest, con un directorio de bandeja por prueba |
-| `docs/assets/` | Los diagramas de flujo claro/oscuro que usa este README |
-| `scripts/gen-readme-assets.py` | Genera programáticamente `docs/assets/dsh-phone-inbox-flow-{light,dark}.svg` |
+| `docs/assets/` | El banner hero y los diagramas de estructura claro/oscuro que usa este README |
+| `scripts/gen-readme-assets.py` | Genera programáticamente `docs/assets/dsh-phone-inbox-hero-{zh,en}-{light,dark}.webp` y `docs/assets/dsh-phone-inbox-flow-v5-{light,dark}.svg` |
 
 Los diagramas los genera [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python + sonda de fuente Pillow) y se pueden volver a ejecutar: `python scripts/gen-readme-assets.py`.
 

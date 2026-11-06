@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="660" viewBox="0 0 1100 660" role="img" aria-label="dsh-phone-inbox 结构图：上半是 inbox_list 的只读汇流——桥的文本标记、结构化附件块与默认关闭的 tempdir 扫描汇入匹配/合并/stat/排序，再分叉出 items[]、emptyReason 与 { ok: false, reason }；下半是 inbox_adopt 的四道门禁竖梯，一次复制跨过工作区边界，按 ctx.fs.writeText 或 node:fs 两条写通道落到工作区里的 relativePath">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0.28" y2="1"><stop offset="0" stop-color="#f9f6fd"/><stop offset="1" stop-color="#e4eaf8"/></linearGradient>
+<filter id="soft" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#16122c" flood-opacity="0.10"/></filter>
+<marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.4" markerHeight="6.4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#4B67B4"/></marker>
+<marker id="arrSoft" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#8f94a4"/></marker>
+</defs>
+<rect width="1100" height="660" fill="url(#bg)"/>
+<text x="44" y="50" fill="#141419" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="26" font-weight="700">dsh-phone-inbox</text>
+<text x="44" y="78" fill="#4d5261" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="14">桥把手机附件写在工作区之外；插件只做两件事：找出这次对话真正收到的，按需复制进来。</text>
+<rect x="872" y="36" width="184" height="26" rx="13" fill="#ece7f9"/>
+<text x="964" y="53" fill="#4B67B4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11.5" text-anchor="middle">maxItems: 5 · provider: session</text>
+<rect x="44" y="100" width="1012" height="216" rx="18" fill="#ffffff" stroke="#e6e2ef" stroke-width="1.4" filter="url(#soft)"/>
+<circle cx="70" cy="126" r="12" fill="#ece7f9"/>
+<text x="70" y="131" fill="#4B67B4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="13" font-weight="700" text-anchor="middle">1</text>
+<text x="92" y="131" fill="#141419" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="15" font-weight="700">inbox_list —— 只读清单，不复制</text>
+<text x="1036" y="130" fill="#8f94a4" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="11" text-anchor="end">每次调用重读 deriveMessages()，不依赖缓存</text>
+<text x="64" y="152" fill="#8f94a4" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="11">本会话的用户消息（role: user）</text>
+<rect x="64" y="158" width="252" height="40" rx="12" fill="#faf8fe" stroke="#e7e4f0" stroke-width="1.2"/>
+<text x="80" y="175" fill="#141419" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="13" font-weight="700">桥的文本标记</text>
+<text x="80" y="191" fill="#8f94a4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11">文件已保存到: …/__.csv</text>
+<rect x="64" y="202" width="252" height="40" rx="12" fill="#faf8fe" stroke="#e7e4f0" stroke-width="1.2"/>
+<text x="80" y="219" fill="#141419" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="13" font-weight="700">结构化附件块</text>
+<text x="80" y="235" fill="#8f94a4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11">{ type:&#x27;file&#x27;, attachment }</text>
+<rect x="64" y="246" width="252" height="40" rx="12" fill="#faf8fe" stroke="#aaa2c8" stroke-width="1.2" stroke-dasharray="5 4"/>
+<text x="80" y="263" fill="#141419" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="13" font-weight="700">tempdir 扫描（默认关）</text>
+<text x="80" y="279" fill="#8f94a4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11">allowTempdirScan: false</text>
+<path d="M316 178 H326 Q336 178 336 188 V212 Q336 222 336 222" fill="none" stroke="#aaa2c8" stroke-width="1.6"/>
+<path d="M316 222 H336" fill="none" stroke="#aaa2c8" stroke-width="1.6"/>
+<path d="M316 266 H326 Q336 266 336 256 V232 Q336 222 336 222" fill="none" stroke="#aaa2c8" stroke-width="1.6"/>
+<circle cx="340" cy="222" r="2.6" fill="#4B67B4"/>
+<rect x="336" y="154" width="420" height="148" rx="14" fill="#f5f2fb" stroke="#e6e2ef" stroke-width="1.2"/>
+<text x="352" y="174" fill="#4B67B4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="13" font-weight="700">probeInbox(...)</text>
+<text x="352" y="188" fill="#4d5261" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="11">能力不可达 → { ok: false, reason }，不猜空列表</text>
+<line x1="352" y1="192" x2="740" y2="192" stroke="#e7e4f0" stroke-width="1"/>
+<text x="352" y="210" fill="#4B67B4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="13" font-weight="700">matcher.match(text)</text>
+<text x="352" y="224" fill="#4d5261" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="11">三个 kind 模板；同一 hostPath 只报一次</text>
+<line x1="352" y1="228" x2="740" y2="228" stroke="#e7e4f0" stroke-width="1"/>
+<text x="352" y="246" fill="#4B67B4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="13" font-weight="700">merge(batches)</text>
+<text x="352" y="260" fill="#4d5261" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="11">按 hostPath 去重，后出现者胜，再 stat</text>
+<line x1="352" y1="264" x2="740" y2="264" stroke="#e7e4f0" stroke-width="1"/>
+<text x="352" y="282" fill="#4B67B4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="13" font-weight="700">order(items, limit)</text>
+<text x="352" y="296" fill="#4d5261" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="11">mtime 新→旧，截到 maxItems</text>
+<rect x="772" y="154" width="264" height="148" rx="14" fill="#ffffff" stroke="#e7e4f0" stroke-width="1.2"/>
+<text x="790" y="174" fill="#4d5261" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="11.5">返回（不是异常）</text>
+<text x="790" y="198" fill="#15803d" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="12" font-weight="700">ok: true</text>
+<text x="790" y="214" fill="#8f94a4" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="11.5">items[] · path / bytes / inWorkspace</text>
+<text x="790" y="242" fill="#b45309" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="12" font-weight="700">emptyReason</text>
+<text x="790" y="258" fill="#8f94a4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11.5">no-inbound-source | source-missing</text>
+<text x="790" y="286" fill="#8f94a4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11.5">ok: false · capability-unavailable</text>
+<rect x="44" y="332" width="1012" height="268" rx="18" fill="#ffffff" stroke="#e6e2ef" stroke-width="1.4" filter="url(#soft)"/>
+<circle cx="70" cy="358" r="12" fill="#ece7f9"/>
+<text x="70" y="363" fill="#4B67B4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="13" font-weight="700" text-anchor="middle">2</text>
+<text x="92" y="363" fill="#141419" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="15" font-weight="700">inbox_adopt —— 只复制一次，只进工作区</text>
+<text x="1036" y="362" fill="#8f94a4" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="11.5" text-anchor="end">输入：items[] 里的一条 path（来自消息文本，不可信）</text>
+<rect x="64" y="374" width="356" height="40" rx="12" fill="#faf8fe" stroke="#e7e4f0" stroke-width="1.2"/>
+<circle cx="86" cy="394" r="10" fill="#ece7f9"/>
+<text x="86" y="398" fill="#4B67B4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11" font-weight="700" text-anchor="middle">1</text>
+<text x="106" y="392" fill="#141419" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="13" font-weight="700">来源归属</text>
+<text x="106" y="408" fill="#8f94a4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11.5">contains(inboxDir, path)</text>
+<text x="404" y="408" fill="#b45309" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11" text-anchor="end">not-in-inbox</text>
+<rect x="64" y="422" width="356" height="40" rx="12" fill="#faf8fe" stroke="#e7e4f0" stroke-width="1.2"/>
+<circle cx="86" cy="442" r="10" fill="#ece7f9"/>
+<text x="86" y="446" fill="#4B67B4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11" font-weight="700" text-anchor="middle">2</text>
+<text x="106" y="440" fill="#141419" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="13" font-weight="700">目标检查</text>
+<text x="106" y="456" fill="#8f94a4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11.5">isFile · ≤ 256 MB · 可读</text>
+<text x="404" y="456" fill="#b45309" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11" text-anchor="end">source-missing</text>
+<rect x="64" y="470" width="356" height="40" rx="12" fill="#faf8fe" stroke="#e7e4f0" stroke-width="1.2"/>
+<circle cx="86" cy="490" r="10" fill="#ece7f9"/>
+<text x="86" y="494" fill="#4B67B4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11" font-weight="700" text-anchor="middle">3</text>
+<text x="106" y="488" fill="#141419" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="13" font-weight="700">落名安全</text>
+<text x="106" y="504" fill="#8f94a4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11.5">safeBasename(displayName)</text>
+<text x="404" y="504" fill="#4B67B4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11" text-anchor="end">→ nameRestored</text>
+<rect x="64" y="518" width="356" height="40" rx="12" fill="#faf8fe" stroke="#e7e4f0" stroke-width="1.2"/>
+<circle cx="86" cy="538" r="10" fill="#ece7f9"/>
+<text x="86" y="542" fill="#4B67B4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11" font-weight="700" text-anchor="middle">4</text>
+<text x="106" y="536" fill="#141419" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="13" font-weight="700">落点规划</text>
+<text x="106" y="552" fill="#8f94a4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11.5">containedJoin(subdir)</text>
+<text x="404" y="552" fill="#b45309" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11" text-anchor="end">destination-exists</text>
+<line x1="440" y1="368" x2="440" y2="556" stroke="#aaa2c8" stroke-width="1.6" stroke-dasharray="6 5"/>
+<path d="M420 466 H448" fill="none" stroke="#4B67B4" stroke-width="2.2" marker-end="url(#arr)"/>
+<path d="M452 466 V430 Q452 424 460 424" fill="none" stroke="#4B67B4" stroke-width="2" marker-end="url(#arr)"/>
+<path d="M452 466 V504 Q452 510 460 510" fill="none" stroke="#4B67B4" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="460" y="400" width="240" height="56" rx="12" fill="#f5f2fb" stroke="#e6e2ef" stroke-width="1.2"/>
+<text x="474" y="420" fill="#4B67B4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11.5" font-weight="700">ctx.fs.writeText</text>
+<text x="474" y="438" fill="#4d5261" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="11.5">文本优先 · 受围栏</text>
+<rect x="609" y="406" width="81" height="20" rx="10" fill="#ece7f9"/>
+<text x="649.5" y="420" fill="#4B67B4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11" text-anchor="middle">fs-service</text>
+<path d="M700 428 H712" fill="none" stroke="#4B67B4" stroke-width="1.8" marker-end="url(#arr)"/>
+<rect x="460" y="484" width="240" height="56" rx="12" fill="#f5f2fb" stroke="#e6e2ef" stroke-width="1.2"/>
+<text x="474" y="504" fill="#4B67B4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11.5" font-weight="700">node:fs.writeFile</text>
+<text x="474" y="522" fill="#4d5261" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="11.5">字节直写 · 不走围栏</text>
+<rect x="627.9" y="490" width="62.1" height="20" rx="10" fill="#ece7f9"/>
+<text x="658.95" y="504" fill="#4B67B4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11" text-anchor="middle">node-fs</text>
+<path d="M700 512 H712" fill="none" stroke="#4B67B4" stroke-width="1.8" marker-end="url(#arr)"/>
+<text x="64" y="580" fill="#8f94a4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11.5">writeChannel: auto · fs 失败回落 node:fs · 重名 -1..-99 · overwrite 才覆盖</text>
+<rect x="714" y="372" width="322" height="200" rx="14" fill="#ffffff" stroke="#e7e4f0" stroke-width="1.2"/>
+<text x="732" y="392" fill="#4d5261" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="11.5">工作区里的文件（header.cwd）</text>
+<text x="732" y="422" fill="#4B67B4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="17" font-weight="700">phone-inbox/材料.csv</text>
+<line x1="732" y1="436" x2="1018" y2="436" stroke="#e7e4f0" stroke-width="1"/>
+<text x="732" y="456" fill="#8f94a4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11.5">relativePath</text>
+<text x="846" y="456" fill="#4d5261" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11.5">phone-inbox/材料.csv</text>
+<text x="732" y="476" fill="#8f94a4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11.5">copyMethod</text>
+<text x="846" y="476" fill="#4d5261" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11.5">node-fs（或 fs-service）</text>
+<text x="732" y="496" fill="#8f94a4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11.5">nameRestored</text>
+<text x="846" y="496" fill="#4d5261" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11.5">true · leaf __.csv</text>
+<text x="732" y="516" fill="#8f94a4" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11.5">bytes · sha256</text>
+<text x="846" y="516" fill="#4d5261" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11.5">写入后实测</text>
+<line x1="732" y1="526" x2="1018" y2="526" stroke="#e7e4f0" stroke-width="1"/>
+<text x="732" y="544" fill="#15803d" font-family="'Consolas','SFMono-Regular','Menlo',ui-monospace,monospace" font-size="11.5" font-weight="700">→ dsh-data-quality</text>
+<text x="732" y="562" fill="#8f94a4" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="11">只收工作区内的相对路径，否则 path-escape</text>
+<text x="44" y="616" fill="#4d5261" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="11.5">失败一律 { ok: false, reason, detail }，不猜空列表；没有 header.cwd 直接 no-workspace，不退回 process.cwd。</text>
+<text x="44" y="638" fill="#8f94a4" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="11.5">provider: session | tempdir（扫描默认关：inboxDir 全局共享）· 系统提示词 phone-inbox order 320 · 订阅 session/event 只观察 user/message</text>
+</svg>

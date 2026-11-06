@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-phone-inbox-flow-dark.svg">
-  <img src="docs/assets/dsh-phone-inbox-flow-light.svg" width="100%" alt="dsh-phone-inbox डेटा प्रवाह: dsh-wechat tempfile → session/event मार्कर → inbox_list → inbox_adopt → कार्यक्षेत्र phone-inbox/ की फ़ाइल">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-phone-inbox-hero-en-dark.webp">
+  <img src="docs/assets/dsh-phone-inbox-hero-en-light.webp" width="100%" alt="dsh-phone-inbox: बाईं ओर प्लगइन का नाम और मूल्य-पंक्तियाँ; दाईं ओर एक अटैचमेंट — ब्रिज द्वारा कार्यक्षेत्र के बाहर __.csv के रूप में सहेजा गया, प्रेषक का नाम अब भी मार्कर में — inbox_adopt की चार जाँचों के बाद phone-inbox/ के अंतर्गत पता-योग्य पथ बन जाता है।">
 </picture>
 
 # dsh-phone-inbox
@@ -35,6 +35,11 @@ dsh plugin --profile <name> add dsh-phone-inbox
 ## यह क्या है
 
 `dsh-wechat` फ़ोन से आए मीडिया को `~/.dsh-wechat/tempfile/` में रखता है — सत्र के कार्यक्षेत्र के **बाहर** — और निरपेक्ष पथ को एक सादे टेक्स्ट संदेश में लिख देता है। `dsh-phone-inbox` उस संदेश से इस बातचीत को वास्तव में मिले अटैचमेंट की सूची निकालता है (`inbox_list`), माँगे जाने पर एक को कार्यक्षेत्र में कॉपी करता है (`inbox_adopt`), और रास्ते में ब्रिज द्वारा बिगाड़ा गया फ़ाइल नाम बहाल करता है। यह दो ऐसी कमियाँ भरता है जो उपयोगकर्ता को दिखती नहीं: `dsh-data-quality` जैसे कार्यक्षेत्र-सीमित उपकरण सत्र से बाहर जाने वाले हर पथ को अस्वीकार करते हैं (`path-escape`), और ब्रिज फ़ाइल नाम के हर गैर-ASCII अक्षर को `_` से बदल देता है, इसलिए चीनी नाम डिस्क पर `__.csv` बन जाता है। यह कोई नया चैनल नहीं जोड़ता और ब्रिज को नहीं बदलता: डिफ़ॉल्ट रूप से केवल इस सत्र के अपने संदेश पढ़ता है और साझा डिरेक्टरी कभी स्कैन नहीं करता। स्रोत provider से अलग है: डिफ़ॉल्ट adapter `dsh-wechat` की temp directory पढ़ता है, custom provider दूसरा स्रोत दे सकता है, और `dsh-wechat` वैकल्पिक है, package dependency नहीं।
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-phone-inbox-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-phone-inbox-flow-v5-light.svg" width="100%" alt="dsh-phone-inbox की संरचना: ऊपर inbox_list का केवल-पढ़ने वाला संगम — ब्रिज के टेक्स्ट मार्कर, संरचित अटैचमेंट ब्लॉक और डिफ़ॉल्ट रूप से बंद tempdir स्कैन मिलान, विलय, stat और क्रम में जाते हैं और फिर items[], emptyReason तथा { ok: false, reason } में बँट जाते हैं; नीचे inbox_adopt की चार-द्वार सीढ़ी, जहाँ एक ही प्रतिलिपि ctx.fs.writeText या node:fs से कार्यक्षेत्र की सीमा पार कर कार्यक्षेत्र के relativePath तक पहुँचती है।">
+</picture>
 
 ## तीन चरणों में शुरुआत
 
@@ -326,8 +331,8 @@ pnpm run acceptance          # शुरू से अंत तक: प्र�
 | `src/tools/*.ts` | दोनों `defineTool` उपभोक्ता, `inbox_list` / `inbox_adopt` |
 | `scripts/acceptance.mjs` | शुरू से अंत तक स्वीकृति: probe → list → adopt → `dsh-data-quality` |
 | `tests/` | vitest, प्रति-परीक्षण inbox डिरेक्टरी के साथ |
-| `docs/assets/` | इस README में प्रयुक्त प्रकाश/गहरे फ़्लो आरेख |
-| `scripts/gen-readme-assets.py` | `docs/assets/dsh-phone-inbox-flow-{light,dark}.svg` प्रोग्रामेटिक रूप से बनाता है |
+| `docs/assets/` | इस README का हीरो बैनर और प्रकाश/गहरे संरचना आरेख |
+| `scripts/gen-readme-assets.py` | `docs/assets/dsh-phone-inbox-hero-{zh,en}-{light,dark}.webp` और `docs/assets/dsh-phone-inbox-flow-v5-{light,dark}.svg` प्रोग्रामेटिक रूप से बनाता है |
 
 आरेख [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) से बनते हैं (Python + Pillow फ़ॉन्ट प्रोब) और दोबारा चलाए जा सकते हैं: `python scripts/gen-readme-assets.py`।
 

@@ -24,6 +24,24 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+
+- **Align the dependency pins and declared host range with the 0.2.2-rc.4
+  line.** `@deepseek-ai/dsh-*` devDependencies move to `0.2.2-rc.4` (npm
+  next), every `@deepseek-ai/dsh-*` peer range gains the append-only
+  `>=0.2.2-0 <0.3.0` clause, and `engines.dsh` gains the same clause. No
+  runtime behaviour changed.
+- `pnpm-workspace.yaml`: `0.2.2-rc.4` folded into the existing
+  `minimumReleaseAgeExclude` rules. pnpm 11.7 enforces a 24-hour
+  `minimumReleaseAge` window and the release candidates are younger than that;
+  it appends one rule per package when it saves the file, but it honours only
+  the **first** rule per package name, so a separate `...@0.2.2-rc.4` entry is
+  dead config. One `||` union per package keeps the lockfile verifiable.
+- Gates: `pnpm run typecheck`, `pnpm test`, `pnpm run build`,
+  `pnpm run verify:self-contained`, `pnpm run verify:artifacts`,
+  `pnpm run check:readmes`, `pnpm run check:lockfile` and
+  `pnpm run acceptance` — all exit 0 on the 0.2.2-rc.4 pins.
+
 ## [0.1.1] - 2026-10-14
 
 ### Fixed

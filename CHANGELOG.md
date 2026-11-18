@@ -24,6 +24,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.7] - 2026-11-18
+
 ### Changed
 
 - **Align the dependency pins and declared host range with the 0.2.2-rc.4

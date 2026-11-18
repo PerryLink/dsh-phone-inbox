@@ -298,7 +298,7 @@ Não: `dsh-wechat` é uma fonte opcional, não uma dependência do pacote. O plu
 
 | Dimensão | Estado |
 |---|---|
-| Harness | `engines.dsh` declara o intervalo OR canônico de seis cláusulas do ecossistema: `>=0.1.2-rc.1 <0.2.0 \|\| >=0.1.5-alpha.1 <0.2.0 \|\| >=0.1.6-0 <0.2.0 \|\| >=0.1.7-0 <0.2.0 \|\| >=0.2.0-0 <0.3.0 \|\| >=0.2.1-0 <0.3.0`; este README usa `>=0.2.1-alpha.1` como piso de execução. O hospedeiro avalia `peerDependencies` no preflight e desativa silenciosamente uma linha de plugin cujo intervalo não admita a versão em execução. |
+| Harness | `dsh-v0.2.2-rc.4`（2026-11-18）；`engines.dsh` declara o intervalo OR canônico de seis cláusulas do ecossistema: `>=0.1.2-rc.1 <0.2.0 \|\| >=0.1.5-alpha.1 <0.2.0 \|\| >=0.1.6-0 <0.2.0 \|\| >=0.1.7-0 <0.2.0 \|\| >=0.2.0-0 <0.3.0 \|\| >=0.2.1-0 <0.3.0 \|\| >=0.2.2-0 <0.3.0`; este README usa `>=0.2.2-rc.4` como piso de execução. O hospedeiro avalia `peerDependencies` no preflight e desativa silenciosamente uma linha de plugin cujo intervalo não admita a versão em execução. |
 | Node | `^22.19.0 \|\| >=24.0.0` |
 | Plataforma | Onde o DSH rodar (host puro, zero dependências de runtime; sem metade de navegador, sem UI) |
 | Modelo | Modelos de texto são totalmente suportados; anexos são tratados como caminhos e marcadores de texto, sem exigência de visão |

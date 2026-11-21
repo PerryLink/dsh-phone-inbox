@@ -25,6 +25,7 @@
     "icon.svg",
     "CHANGELOG.md",
     "SECURITY.md",
+    "docs/assets/*",
     "PRIVACY.md"
   ],
   "scripts": {

@@ -119,6 +119,10 @@ Returns `{ ok: true, item }` with `hostPath`, `workspacePath`, `relativePath`, `
 
 ### Examples
 
+![dsh-phone-inbox: real terminal run](docs/assets/dsh-phone-inbox-demo.gif)
+
+*Animated replay of a real run recorded in this repository.*
+
 These are the plugin's real entry points; install once, then call one.
 
 **Detailed example** — command `inbox_adopt`, input:

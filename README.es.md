@@ -41,6 +41,11 @@ dsh plugin --profile <name> add dsh-phone-inbox
   <img src="docs/assets/dsh-phone-inbox-flow-v5-light.svg" width="100%" alt="Estructura de dsh-phone-inbox: arriba, la confluencia de solo lectura de inbox_list —los marcadores de texto del puente, los bloques de adjuntos estructurados y el escaneo tempdir desactivado por defecto alimentan la coincidencia, la fusión, el stat y el orden, y luego se bifurcan en items[], emptyReason y { ok: false, reason }; abajo, la escalera de cuatro puertas de inbox_adopt, donde una sola copia cruza el límite del espacio de trabajo por ctx.fs.writeText o node:fs hasta el relativePath del espacio de trabajo.">
 </picture>
 
+![dsh-phone-inbox: ejecución real de terminal](docs/assets/dsh-phone-inbox-demo.gif)
+
+*Repetición animada de una ejecución real registrada en este repositorio.*
+
+
 ## Instalación en tres pasos
 
 1. **Instalar** (elige un canal):

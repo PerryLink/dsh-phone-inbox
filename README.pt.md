@@ -41,6 +41,11 @@ O `dsh-wechat` grava as mídias recebidas do telefone em `~/.dsh-wechat/tempfile
   <img src="docs/assets/dsh-phone-inbox-flow-v5-light.svg" width="100%" alt="Estrutura do dsh-phone-inbox: em cima, a confluência somente leitura do inbox_list — marcadores de texto da ponte, blocos de anexos estruturados e a varredura tempdir desligada por padrão alimentam a correspondência, a fusão, o stat e a ordenação, e depois se ramificam em items[], emptyReason e { ok: false, reason }; embaixo, a escada de quatro portões do inbox_adopt, onde uma única cópia cruza o limite do espaço de trabalho por ctx.fs.writeText ou node:fs até o relativePath do espaço de trabalho.">
 </picture>
 
+![dsh-phone-inbox: execução real de terminal](docs/assets/dsh-phone-inbox-demo.gif)
+
+*Repetição animada de uma execução real registrada neste repositório.*
+
+
 ## Instalação em três passos
 
 1. **Instalar** (escolha um canal):

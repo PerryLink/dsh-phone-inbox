@@ -41,6 +41,11 @@ dsh plugin --profile <name> add dsh-phone-inbox
   <img src="docs/assets/dsh-phone-inbox-flow-v5-light.svg" width="100%" alt="dsh-phone-inbox की संरचना: ऊपर inbox_list का केवल-पढ़ने वाला संगम — ब्रिज के टेक्स्ट मार्कर, संरचित अटैचमेंट ब्लॉक और डिफ़ॉल्ट रूप से बंद tempdir स्कैन मिलान, विलय, stat और क्रम में जाते हैं और फिर items[], emptyReason तथा { ok: false, reason } में बँट जाते हैं; नीचे inbox_adopt की चार-द्वार सीढ़ी, जहाँ एक ही प्रतिलिपि ctx.fs.writeText या node:fs से कार्यक्षेत्र की सीमा पार कर कार्यक्षेत्र के relativePath तक पहुँचती है।">
 </picture>
 
+![dsh-phone-inbox का असली टर्मिनल रन](docs/assets/dsh-phone-inbox-demo.gif)
+
+*इस रिपॉज़िटरी में दर्ज असली रन का एनिमेटेड रीप्ले।*
+
+
 ## तीन चरणों में शुरुआत
 
 1. **इंस्टॉल करें** (एक चैनल चुनें):

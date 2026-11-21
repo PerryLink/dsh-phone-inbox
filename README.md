@@ -34,6 +34,10 @@ dsh plugin --profile <name> add dsh-phone-inbox
 
 ## 它是什么
 
+![dsh-phone-inbox 真实终端运行](docs/assets/dsh-phone-inbox-demo.gif)
+
+*本仓库一次真实运行的动图回放。*
+
 `dsh-wechat` 把手机发来的媒体存到 `~/.dsh-wechat/tempfile/` —— 在会话工作区**之外** —— 并把绝对路径写进一条纯文本消息。`dsh-phone-inbox` 从这条消息里恢复出这次对话真正收到的附件清单（`inbox_list`），需要时把其中一条复制进工作区（`inbox_adopt`），沿途把桥压坏的文件名恢复回来。这补上两个用户看不见的缺口：强制工作区的工具（如 `dsh-data-quality`）会拒绝任何逃出会话工作区的路径（`path-escape`）；桥又把文件名里的非 ASCII 字符压成 `_`，`材料.csv` 落盘就成了 `__.csv`。它不新开通道，也不改变桥的行为：默认只认本会话自己的消息，不扫描共享目录。来源与 provider 解耦：默认适配器读 `dsh-wechat` 的临时目录，自定义 provider 也可以接别的来源，`dsh-wechat` 是可选来源、不是包依赖。
 
 <picture>

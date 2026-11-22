@@ -304,7 +304,7 @@ No: `dsh-wechat` es una fuente opcional, no una dependencia del paquete. El plug
 
 | Dimensión | Estado |
 |---|---|
-| Harness | `dsh-v0.2.2-rc.4`（2026-11-18）；`engines.dsh` declara el rango OR canónico de seis cláusulas del ecosistema: `>=0.1.2-rc.1 <0.2.0 \|\| >=0.1.5-alpha.1 <0.2.0 \|\| >=0.1.6-0 <0.2.0 \|\| >=0.1.7-0 <0.2.0 \|\| >=0.2.0-0 <0.3.0 \|\| >=0.2.1-0 <0.3.0 \|\| >=0.2.2-0 <0.3.0`; este README usa `>=0.2.2-rc.4` como piso de ejecución. El anfitrión evalúa `peerDependencies` en el preflight y desactiva silenciosamente una fila de plugin cuyo rango no admita la versión en ejecución. |
+| Harness | `dsh-v0.2.2-rc.4`（2026-11-18）；`engines.dsh` declara el rango OR canónico de seis cláusulas del ecosistema: `>=0.1.2-rc.1 <0.2.0 \|\| >=0.1.5-alpha.1 <0.2.0 \|\| >=0.1.6-0 <0.2.0 \|\| >=0.1.8-0 <0.2.0 \|\| >=0.2.0-0 <0.3.0 \|\| >=0.2.1-0 <0.3.0 \|\| >=0.2.2-0 <0.3.0`; este README usa `>=0.2.2-rc.4` como piso de ejecución. El anfitrión evalúa `peerDependencies` en el preflight y desactiva silenciosamente una fila de plugin cuyo rango no admita la versión en ejecución. |
 | Node | `^22.19.0 \|\| >=24.0.0` |
 | Plataforma | Dondequiera que corra DSH (host puro, cero dependencias de ejecución; sin mitad de navegador, sin UI) |
 | Modelo | Los modelos de texto son totalmente compatibles; los adjuntos se manejan como rutas y marcadores de texto, sin requisito de visión |

@@ -304,7 +304,7 @@ No: `dsh-wechat` is an optional source, not a package dependency. The plugin dep
 
 | Dimension | Status |
 |---|---|
-| Harness | `dsh-v0.2.2-rc.4`（2026-11-18）；`engines.dsh` declares the ecosystem's six-clause OR range: `>=0.1.2-rc.1 <0.2.0 \|\| >=0.1.5-alpha.1 <0.2.0 \|\| >=0.1.6-0 <0.2.0 \|\| >=0.1.7-0 <0.2.0 \|\| >=0.2.0-0 <0.3.0 \|\| >=0.2.1-0 <0.3.0 \|\| >=0.2.2-0 <0.3.0`; this README uses `>=0.2.2-rc.4` as the runtime floor. The host evaluates `peerDependencies` at preflight and silently disables a plugin row whose range does not admit the running version. |
+| Harness | `dsh-v0.2.2-rc.4`（2026-11-18）；`engines.dsh` declares the ecosystem's six-clause OR range: `>=0.1.2-rc.1 <0.2.0 \|\| >=0.1.5-alpha.1 <0.2.0 \|\| >=0.1.6-0 <0.2.0 \|\| >=0.1.8-0 <0.2.0 \|\| >=0.2.0-0 <0.3.0 \|\| >=0.2.1-0 <0.3.0 \|\| >=0.2.2-0 <0.3.0`; this README uses `>=0.2.2-rc.4` as the runtime floor. The host evaluates `peerDependencies` at preflight and silently disables a plugin row whose range does not admit the running version. |
 | Node | `^22.19.0 \|\| >=24.0.0` |
 | Platform | Anywhere DSH runs (pure host, zero runtime dependencies; no browser half, no UI) |
 | Model | Text models are fully supported; attachments are handled as paths and text markers, with no vision requirement |

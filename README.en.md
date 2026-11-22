@@ -11,6 +11,8 @@
 
 The session's inbound attachment inbox for DeepSeek Harness: list the phone (WeChat bridge) attachments this conversation actually received, adopt one into the workspace on demand, and restore the file name the bridge mangled.
 
+Last verified on DeepSeek Harness `dsh-v0.2.3-alpha.1` (2026-11-22).
+
 [Install](#three-step-setup) · [Configuration](#configuration) · [FAQ](#faq) · [简体中文](README.md) · [English](README.en.md) · [Español](README.es.md) · [Português](README.pt.md) · [हिन्दी](README.hi.md)
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-3366CC?style=flat-square&labelColor=2B3245)](LICENSE)

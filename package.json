@@ -1,6 +1,6 @@
 {
   "name": "dsh-phone-inbox",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "The session's inbound phone (WeChat bridge) attachment inbox: list the attachments this conversation actually received and adopt one into the workspace on demand.",
   "type": "module",
   "main": "lib/index.mjs",
@@ -78,7 +78,7 @@
   },
   "engines": {
     "node": "^22.19.0 || >=24.0.0",
-    "dsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0 || >=0.1.7-0 <0.2.0 || >=0.2.0-0 <0.3.0 || >=0.2.1-0 <0.3.0 || >=0.2.2-0 <0.3.0 || >=0.2.3-0 <0.3.0-0"
+    "dsh": ">=0.2.0-0 <0.4.0-0"
   },
   "packageManager": "pnpm@11.7.0",
   "peerDependencies": {
